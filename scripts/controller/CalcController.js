@@ -1,4 +1,8 @@
 class CalcController {
+    /*                  ----INÍCIO DO CONSTRUCTOR----
+    no constructor, adicionamos todos os métodos que serão criados e personalizados 
+    ao longo do código para que eles possam ser utilizados no projeto final*/
+    
     constructor(){
         this._locale = 'pt-BR';
         this._displayCalcEl = document.querySelector("#display"); // a variável foi definida para podermos manipular esses elementos (DOM)
@@ -6,16 +10,24 @@ class CalcController {
         this._timeEl = document.querySelector("#hora"); // a variável foi definida para podermos manipular esses elementos (DOM)
         this._currentDate;
         this.initialize(); 
+        this.initButtonsEvents();
     }
-
+    //                    ----FIM DO CONSTRUCTOR---- 
     
     initialize(){
        this.setDisplayDateTime();
         
        setInterval(()=>{
         this.setDisplayDateTime();
-       }, 1000);
-
+       }, 1000); //modelo de arrow function
+    }
+    
+    initButtonsEvents(){
+        let buttons = document.querySelectorAll("#buttons > g, #parts > g"); //seleciona todas as tags "g" dentro de buttons e parts
+        
+        buttons.addEventListener('click', acao=>{
+            
+        });
     }
     
     setDisplayDateTime(){
