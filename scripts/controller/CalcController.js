@@ -25,9 +25,11 @@ class CalcController {
     initButtonsEvents(){
         let buttons = document.querySelectorAll("#buttons > g, #parts > g"); //seleciona todas as tags "g" dentro de buttons e parts
         
-        buttons.addEventListener('click', acao=>{
-            
-        });
+        buttons.forEach((btn, index)=>{
+            btn.addEventListener('click', e => {
+                console.log(btn.className.baseVal.replace("btn-", "")); //mudamos (replace) a informação padrão (baseVal) que aparece no console após o evento de click
+            });                                                          
+        })
     }
     
     setDisplayDateTime(){
