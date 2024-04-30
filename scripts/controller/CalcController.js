@@ -22,13 +22,23 @@ class CalcController {
        }, 1000); //modelo de arrow function
     }
     
+    addEventListenerAll(element, events, fn){
+        events.split(' ').forEach(event => {
+            element.addEventListener(event, fn, false);
+        });
+    }
+
     initButtonsEvents(){
-        let buttons = document.querySelectorAll("#buttons > g, #parts > g"); //seleciona todas as tags "g" dentro de buttons e parts
+        let buttons = document.querySelectorAll("#buttons > g, #parts > g"); //seleciona todas as tags "g" dentro de buttons e parts no HTML
         
         buttons.forEach((btn, index)=>{
-            btn.addEventListener('click', e => {
+            this.addEventListenerAll(btn, "click drag", e => {
                 console.log(btn.className.baseVal.replace("btn-", "")); //mudamos (replace) a informação padrão (baseVal) que aparece no console após o evento de click
             });                                                          
+            
+            this.addEventListenerAll(btn, "mouseover mouseup mousedown", e => {
+                btn.style.cursor = "pointer";
+            });
         })
     }
     
