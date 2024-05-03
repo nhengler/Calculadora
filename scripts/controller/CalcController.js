@@ -29,6 +29,7 @@ class CalcController {
         });
     }
     
+    //                    ----INÍCIO DA CRIAÇÃO DOS MÉTODOS DE CÁLCULO----
     clearEntry(){
         this._operation.pop(); // POP é utilizado para apagar o último item adicionado em um array
     }
@@ -37,8 +38,31 @@ class CalcController {
         this._operation = []; // recebe o array vazio, pois sua função é apagar todas as informações
     }
 
+    getLastOperation(){
+        return this._operation[this._operation.lenght-1];
+    }
+
+    setLastOperation(){
+        this._operation[this._operation.lenght-1] = value;
+    }
+
+    isOperator(value){
+       return (['+', '-', '*', '/', '%'].indexOf(value) > -1);
+    }
+
     addOperation(value){
-        this._operation.push(value); // o método PUSH é utilziado para adicionar mais itens ao array
+        if (isNaN(this.getLastOperation())){
+            if(this.isOperator(value)){
+                this._setLastOperation(value);
+            
+            } else if(isNaN(value)) {
+                console.log(value);
+            }
+        
+        } else {
+            let newValue = this.getLastOperation().toString() + value.toString(); 
+            this.setLastOperation(parseInt(newValue)); // o método PUSH é utilziado para adicionar mais itens ao array
+        }
     }
 
     setError(){
@@ -56,32 +80,36 @@ class CalcController {
                 break;
             
             case 'soma':
-                this.somar();
+                addOperation('+');
                 break;
         
             case 'subtracao':
-                this.subtrair();
+                addOperation('-');
                 break;
 
             case 'multiplicacao':
-                this.multiplicar();
+                addOperation('*');
                 break;    
                 
             case 'divisao':
-                this.dividir();
+                addOperation('/');
                 break;
 
             case 'porcento':
-                this.porcentagem();
+                addOperation('%');
                 break;
 
             case 'igual':
                 this.igualdade();
                 break;
 
-            default:
-                this.setError();
+            case 'ponto':
+                addOperation('.');
                 break;
+
+            default:
+            this.setError();
+            break;
             
             case '0':
             case '1': 
